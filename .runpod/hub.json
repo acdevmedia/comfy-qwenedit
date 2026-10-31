@@ -1,0 +1,40 @@
+{
+  "title": "Qwen Image Edit 2511 ComfyUI One-Click",
+  "description": "Qwen Image Edit 2511 image editing in ComfyUI on native nodes, with a 4-step Lightning option.",
+  "type": "serverless",
+  "category": "image",
+  "config": {
+    "runsOn": "GPU",
+    "endpointType": "LB",
+    "containerDiskInGb": 200,
+    "gpuCount": 1,
+    "gpuIds": "ADA_48_PRO,AMPERE_48",
+    "allowedCudaVersions": [
+      "12.8",
+      "12.9",
+      "13.0"
+    ],
+    "env": [
+      {
+        "key": "HF_HOME",
+        "value": "/workspace/.cache/huggingface"
+      },
+      {
+        "key": "MODEL_MODE",
+        "value": "lightning"
+      },
+      {
+        "key": "STUDIO_VERSION",
+        "value": "2511"
+      },
+      {
+        "key": "PORT",
+        "value": "8000"
+      },
+      {
+        "key": "PORT_HEALTH",
+        "value": "8001"
+      }
+    ]
+  }
+}

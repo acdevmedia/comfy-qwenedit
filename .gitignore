@@ -1,0 +1,20 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.log
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+/build/
+# Validation harness output, including its ephemeral SSH private key.
+.runtime/
+*.pem
+*.key
+test-key*
+known_hosts
+*.mp4
+*.wav

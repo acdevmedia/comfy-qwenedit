@@ -1,0 +1,20 @@
+{
+  "name": "Qwen Image Edit 2511 ComfyUI One-Click",
+  "imageName": "ghcr.io/acdevmedia/qwenedit-comfyui:2511",
+  "category": "NVIDIA",
+  "containerDiskInGb": 200,
+  "volumeInGb": 0,
+  "volumeMountPath": "/workspace",
+  "isPublic": true,
+  "isServerless": false,
+  "ports": [
+    "8188/http"
+  ],
+  "env": {
+    "HF_HOME": "/workspace/.cache/huggingface",
+    "MODEL_MODE": "lightning",
+    "STUDIO_VERSION": "2511",
+    "PORT": "8000",
+    "PORT_HEALTH": "8001"
+  }
+}
