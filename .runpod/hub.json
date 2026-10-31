@@ -1,6 +1,6 @@
 {
   "title": "Qwen Image Edit 2511 ComfyUI One-Click",
-  "description": "Qwen Image Edit 2511 image editing in ComfyUI on native nodes, with a 4-step Lightning option.",
+  "description": "Qwen Image Edit 2511 image editing in ComfyUI on native nodes, with a fast Lightning option and a full-quality Standard option.",
   "type": "serverless",
   "category": "image",
   "config": {

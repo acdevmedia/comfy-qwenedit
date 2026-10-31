@@ -1,5 +1,7 @@
 # Qwen Image Edit 2511 ComfyUI One-Click
 
+[![Runpod](https://api.runpod.io/badge/acdevmedia/comfy-qwenedit)](https://console.runpod.io/hub/listing/acdevmedia/comfy-qwenedit)
+
 Qwen-Image-Edit-2511 running in ComfyUI: instruction-based image editing with strong identity consistency, multi-person fusion and up to three reference images. Weights are **Apache 2.0** and published ungated by Qwen, and packaged for ComfyUI by Comfy-Org, so there is no access agreement, no token to configure, and no licence barrier to commercial use.
 
 Container: **`ghcr.io/acdevmedia/qwenedit-comfyui:2511`**, with an immutable `2511-sha-<commit>` tag per build. Model revisions, checksums and workflow defaults live under `versions/2511/`. Everything runs on ComfyUI's **native** Qwen-Image-Edit support — no custom nodes.
