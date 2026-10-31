@@ -56,3 +56,15 @@ runs in CI before each build, so this run used verified pins.
 The harness asserts dimensions, pixel variance, entropy and flatness, and that an edit genuinely differs from its
 source. It does not judge whether the requested edit was actually made, prompt adherence or artefacts: a corrupted
 render with heavy texture raises entropy and passes. Inspect the uploaded PNGs.
+
+## Default changed after hands-on testing
+
+The GPU matrix above ran Lightning at its nominal 4 steps and cfg 1. Using the pod by hand afterwards showed that
+setting did not follow edit instructions, and that **8 steps with cfg 4** does for small, local edits: removing a
+smartphone from a photograph removes it. Larger edits (a new person, a new location, a new camera angle) remain
+less reliable. The packaged Lightning workflows now use 8 steps and cfg 4.
+
+Two caveats. This setting has been judged by hand on real photographs, not by the harness, and the packaged graphs
+have not been through a fresh matrix run since the change. And a separate sweep at 4 steps found cfg 4 and 6 added a
+warm colour cast to the whole image on a lighthouse photograph, so the cast is worth watching at 8 steps. On an A40
+these runs take about 37 s each, according to the Job Queue.

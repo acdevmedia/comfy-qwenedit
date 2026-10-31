@@ -12,8 +12,13 @@ LORA = 'Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors'
 
 # Reference settings: Lightning is the 4-step distilled LoRA at cfg 1; standard is the base model
 # at the 40 steps and true-CFG 4.0 published on the model card, with its single-space negative.
+# Lightning is the distilled LoRA run at 8 steps and cfg 4, which hands-on testing found follows an edit
+# instruction (removing a phone from a photo, for instance) where the LoRA's nominal 4 steps at cfg 1 did
+# not; the larger changes (a new person, a new location, a new camera angle) still land less reliably.
+# Standard is the base model at the 40 steps and true-CFG 4.0 published on the model card, with its
+# single-space negative.
 VARIANTS = {
-    'LIGHTNING': dict(lora=True, steps=4, cfg=1.0, negative='', prefix='QwenEdit/lightning'),
+    'LIGHTNING': dict(lora=True, steps=8, cfg=4.0, negative='', prefix='QwenEdit/lightning'),
     'STANDARD': dict(lora=False, steps=40, cfg=4.0, negative=' ', prefix='QwenEdit/standard'),
 }
 PROMPT = 'Change the background to a sunny beach and keep the person exactly as they are.'

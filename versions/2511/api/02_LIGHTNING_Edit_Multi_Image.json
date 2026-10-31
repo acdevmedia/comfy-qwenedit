@@ -190,8 +190,8 @@
         0
       ],
       "seed": 0,
-      "steps": 4,
-      "cfg": 1.0,
+      "steps": 8,
+      "cfg": 4.0,
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1.0

@@ -23,13 +23,15 @@ Describe the *change*, not the whole picture: "Change the background to a rainy 
 
 | Workflow | Images | Steps | CFG |
 | --- | --- | --- | --- |
-| **01 Lightning Edit** (default) | 1 | 4 | 1.0 |
-| **02 Lightning Edit Multi Image** | up to 3 | 4 | 1.0 |
+| **01 Lightning Edit** (default) | 1 | 8 | 4.0 |
+| **02 Lightning Edit Multi Image** | up to 3 | 8 | 4.0 |
 | **03 Standard Edit** | 1 | 40 | 4.0 |
 | **04 Standard Edit Multi Image** | up to 3 | 40 | 4.0 |
 | **10 Advanced user recipe** | up to 3 | 4 | 1.0 |
 
-**Lightning** applies the distilled 4-step LoRA at strength 1.0 and is the sensible default: roughly ten times fewer steps, with CFG 1.0 so no second forward pass. **Standard** is the base model on the published reference settings — 40 steps and true CFG 4.0 — for when you want the model's own full sampling. It is far slower: on an A40 at 512 × 512 it took about 127 s for one image and 325 s with three inputs, against 22 s for Lightning. Prefer Lightning, and use an L40S for standard. `MODEL_MODE` selects which to download; the two share every weight except the 0.85 GB LoRA.
+**Lightning** applies the distilled LoRA at strength 1.0 and is the default. It runs at **8 steps and cfg 4**, which is not the LoRA's nominal setting: it is a 4-step distillation meant for cfg 1, but hands-on testing found that cfg 4 over 8 steps makes it follow an edit instruction where 4 steps at cfg 1 often did not. Removing a phone from a photo, for example, now removes it. Because cfg above 1 adds a second forward pass, an image takes about 37 s on an A40 against about 14 s at cfg 1. **Standard** is the base model on the published reference settings, 40 steps and true CFG 4.0, and is far slower, taking about 127 s for one image and 325 s with three inputs on an A40 at 512 × 512. Prefer Lightning, and use an L40S for standard. `MODEL_MODE` selects which to download; the two share every weight except the 0.85 GB LoRA.
+
+**Larger edits are the limit.** Adding a new person, moving the subject to a different location or changing the camera angle land less reliably than small, local edits, at either variant. Describe the change and what must stay, and expect to try a few seeds.
 
 The multi-image workflows take one to three pictures; leave the extra loaders empty or unconnected for fewer. Each input is scaled to a total of about **1 megapixel** before encoding, which is the resolution the model works at, and the output follows the first image's proportions.
 
@@ -40,7 +42,7 @@ The multi-image workflows take one to three pictures; leave the extra loaders em
 - **Sampler** `euler` / `simple`, `denoise` 1.0, with `ModelSamplingAuraFlow` shift **3.1** and `CFGNorm` strength 1.0. These match the upstream templates.
 - **Text encoder** loads with `CLIPLoader` type `qwen_image`.
 - **Megapixels** on each `ImageScaleToTotalPixels` node sets working resolution. Raise it for more detail at a higher memory cost; 1.0 is the default.
-- **Negative prompt** is empty for Lightning, where CFG 1.0 makes it inert, and a single space for Standard, as on the model card.
+- **Negative prompt** is empty for Lightning and a single space for Standard, as on the model card. Both run above cfg 1, so a negative prompt now has an effect if you add one.
 
 ## Seeds
 
