@@ -29,7 +29,7 @@ Describe the *change*, not the whole picture: "Change the background to a rainy 
 | **04 Standard Edit Multi Image** | up to 3 | 40 | 4.0 |
 | **10 Advanced user recipe** | up to 3 | 4 | 1.0 |
 
-**Lightning** applies the distilled 4-step LoRA at strength 1.0 and is the sensible default: roughly ten times fewer steps, with CFG 1.0 so no second forward pass. **Standard** is the base model on the published reference settings — 40 steps and true CFG 4.0 — for when quality matters more than speed. `MODEL_MODE` selects which to download; the two share every weight except the 0.85 GB LoRA.
+**Lightning** applies the distilled 4-step LoRA at strength 1.0 and is the sensible default: roughly ten times fewer steps, with CFG 1.0 so no second forward pass. **Standard** is the base model on the published reference settings — 40 steps and true CFG 4.0 — for when you want the model's own full sampling. It is far slower: on an A40 at 512 × 512 it took about 127 s for one image and 325 s with three inputs, against 22 s for Lightning. Prefer Lightning, and use an L40S for standard. `MODEL_MODE` selects which to download; the two share every weight except the 0.85 GB LoRA.
 
 The multi-image workflows take one to three pictures; leave the extra loaders empty or unconnected for fewer. Each input is scaled to a total of about **1 megapixel** before encoding, which is the resolution the model works at, and the output follows the first image's proportions.
 
@@ -73,7 +73,7 @@ Paid GPU tests are opt-in through the `gpu_smoke` dispatch input. When set, Acti
 
 - **Connect opens ComfyUI with HTTP 403:** ComfyUI's browser-origin guard rejects cross-site page navigations, and a link clicked from the Runpod dashboard counts as cross-site. This image patches the guard at build time to permit only a safe top-level `GET /` navigation. On a Pod built from an older digest, paste `https://<pod-id>-8188.proxy.runpod.net` into a blank tab instead.
 - **ComfyUI does not become ready:** first boot downloads about 31 GB before ComfyUI starts. Check the Pod logs.
-- **The edit ignores part of the prompt or changes too much:** describe the change and say what to keep, and refer to inputs by number. Standard mode follows instructions more closely than Lightning.
+- **The edit ignores part of the prompt or changes too much:** describe the change and say what to keep, and refer to inputs by number. Lightning left untouched what it was told to keep in testing, whereas standard sometimes elaborated on it, drawing a neck and shoulders onto a head-shaped circle when told to "keep the person". Say exactly what must not change.
 - **Out of GPU memory:** use a 48 GB card.
 
 ## Attribution
