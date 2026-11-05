@@ -2,7 +2,7 @@
 
 [![Runpod](https://api.runpod.io/badge/acdevmedia/comfy-qwenedit)](https://console.runpod.io/hub/listing/acdevmedia/comfy-qwenedit)
 
-Qwen-Image-Edit-2511 running in ComfyUI: instruction-based image editing with strong identity consistency, multi-person fusion and up to three reference images. Weights are **Apache 2.0** and published ungated by Qwen, and packaged for ComfyUI by Comfy-Org, so there is no access agreement, no token to configure, and no licence barrier to commercial use.
+Qwen-Image-Edit-2511 running in ComfyUI: instruction-based image editing with strong identity consistency, multi-person fusion and up to three reference images. Weights are **Apache 2.0** and published ungated by Qwen, and packaged for ComfyUI by Comfy-Org, so there is no access agreement, no mandatory token, and no licence barrier to commercial use.
 
 Container: **`ghcr.io/acdevmedia/qwenedit-comfyui:2511`**, with an immutable `2511-sha-<commit>` tag per build. Model revisions, checksums and workflow defaults live under `versions/2511/`. Everything runs on ComfyUI's **native** Qwen-Image-Edit support — no custom nodes.
 
@@ -13,7 +13,7 @@ Container: **`ghcr.io/acdevmedia/qwenedit-comfyui:2511`**, with an immutable `25
 3. Open **Connect → HTTP 8188 / ComfyUI** once the service reports Ready. First boot downloads the pinned weights into `/workspace/ComfyUI/models`.
 4. Pick a workflow in the sidebar, load an image, describe the edit, press Queue.
 
-No Hugging Face token is needed. Storage is temporary and no network volume is attached. First-boot downloads resume, your workflow edits persist across restarts, and no weights or credentials are baked into the image.
+For authenticated downloads, create Runpod Secret `HUGGINGFACE_TOKEN` with your Hugging Face read token; the template maps it to `HF_TOKEN`. The weights are ungated, so you can remove the mapping to download anonymously. Storage is temporary and no network volume is attached. First-boot downloads resume, your workflow edits persist across restarts, and no weights or credentials are baked into the image.
 
 ## This is an editing model
 
@@ -56,6 +56,7 @@ A strip of recent output images sits along the bottom of the window and refreshe
 
 ## Environment variables
 
+- `HF_TOKEN`: `{{ RUNPOD_SECRET_HUGGINGFACE_TOKEN }}`; optional read token for authenticated Hugging Face downloads.
 - `HF_HOME=/workspace/.cache/huggingface`: Hugging Face cache and metadata location.
 - `MODEL_MODE=lightning`: which variant to download — `lightning`, `standard` or `both`. About 31 GB either way; the variants differ by a 0.85 GB LoRA.
 - `STUDIO_VERSION=2511`: which generation this image serves, baked at build time from `versions/2511/profile.json`.

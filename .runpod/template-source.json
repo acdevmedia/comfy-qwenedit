@@ -12,7 +12,8 @@
     "MODEL_MODE": "lightning",
     "STUDIO_VERSION": "2511",
     "PORT": "8000",
-    "PORT_HEALTH": "8001"
+    "PORT_HEALTH": "8001",
+    "HF_TOKEN": "{{ RUNPOD_SECRET_HUGGINGFACE_TOKEN }}"
   },
   "isPublic": true,
   "startJupyter": false,
