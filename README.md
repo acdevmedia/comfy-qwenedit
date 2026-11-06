@@ -84,3 +84,7 @@ Paid GPU tests are opt-in through the `gpu_smoke` dispatch input. When set, Acti
 ## Attribution
 
 Model: [Qwen/Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511), Apache 2.0, packaged for ComfyUI by [Comfy-Org](https://huggingface.co/Comfy-Org/Qwen-Image-Edit). Lightning LoRA: [lightx2v/Qwen-Image-Edit-2511-Lightning](https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning).
+
+## CPU thread sizing
+
+CPU thread pools are sized automatically to the container CPU quota and available CPUs before PyTorch starts, avoiding host-sized pools that can throttle image scaling and export. Set `OMP_NUM_THREADS` and optionally `MKL_NUM_THREADS` to override; startup logs show the selected values. Actual speedup depends on the workload and has not been benchmarked for this revision.
