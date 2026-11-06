@@ -1,6 +1,6 @@
 {
-  "last_node_id": 36,
-  "last_link_id": 34,
+  "last_node_id": 37,
+  "last_link_id": 36,
   "nodes": [
     {
       "id": 1,
@@ -369,7 +369,7 @@
           "widget": {
             "name": "width"
           },
-          "link": 33
+          "link": 35
         },
         {
           "name": "height",
@@ -377,7 +377,7 @@
           "widget": {
             "name": "height"
           },
-          "link": 34
+          "link": 36
         }
       ],
       "outputs": [
@@ -397,7 +397,7 @@
         "lanczos",
         1024,
         1024,
-        "disabled"
+        "center"
       ],
       "title": "Resize image to the fitted frame"
     },
@@ -689,7 +689,7 @@
           "type": "INT",
           "links": [
             25,
-            29
+            30
           ]
         }
       ],
@@ -723,7 +723,7 @@
           "type": "INT",
           "links": [
             26,
-            30
+            31
           ]
         }
       ],
@@ -762,7 +762,7 @@
           "type": "INT",
           "links": [
             27,
-            31
+            32
           ],
           "slot_index": 0
         },
@@ -771,7 +771,7 @@
           "type": "INT",
           "links": [
             28,
-            32
+            33
           ],
           "slot_index": 1
         },
@@ -830,6 +830,11 @@
           "name": "values.d",
           "type": "FLOAT,INT,BOOLEAN",
           "link": 28
+        },
+        {
+          "name": "values.e",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 29
         }
       ],
       "outputs": [
@@ -843,7 +848,7 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            33
+            35
           ],
           "slot_index": 1
         },
@@ -859,7 +864,7 @@
         "Node name for S&R": "ComfyMathExpression"
       },
       "widgets_values": [
-        "max(64,round(sqrt(a*b*c/d)/32)*32)"
+        "a if e else max(64,round(sqrt(a*b*c/d)/32)*32)"
       ]
     },
     {
@@ -888,22 +893,27 @@
         {
           "name": "values.a",
           "type": "FLOAT,INT,BOOLEAN",
-          "link": 29
+          "link": 30
         },
         {
           "name": "values.b",
           "type": "FLOAT,INT,BOOLEAN",
-          "link": 30
+          "link": 31
         },
         {
           "name": "values.c",
           "type": "FLOAT,INT,BOOLEAN",
-          "link": 31
+          "link": 32
         },
         {
           "name": "values.d",
           "type": "FLOAT,INT,BOOLEAN",
-          "link": 32
+          "link": 33
+        },
+        {
+          "name": "values.e",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 34
         }
       ],
       "outputs": [
@@ -917,7 +927,7 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            34
+            36
           ],
           "slot_index": 1
         },
@@ -933,7 +943,41 @@
         "Node name for S&R": "ComfyMathExpression"
       },
       "widgets_values": [
-        "max(64,round(sqrt(a*b*d/c)/32)*32)"
+        "b if e else max(64,round(sqrt(a*b*d/c)/32)*32)"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "PrimitiveBoolean",
+      "title": "Exact Frame: use Render Width and Height, cropping the image",
+      "pos": [
+        40,
+        650
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            29,
+            34
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean"
+      },
+      "widgets_values": [
+        false
       ]
     }
   ],
@@ -1148,6 +1192,14 @@
     ],
     [
       29,
+      37,
+      0,
+      35,
+      5,
+      "BOOLEAN"
+    ],
+    [
+      30,
       32,
       0,
       36,
@@ -1155,7 +1207,7 @@
       "INT"
     ],
     [
-      30,
+      31,
       33,
       0,
       36,
@@ -1163,7 +1215,7 @@
       "INT"
     ],
     [
-      31,
+      32,
       34,
       0,
       36,
@@ -1171,7 +1223,7 @@
       "INT"
     ],
     [
-      32,
+      33,
       34,
       1,
       36,
@@ -1179,7 +1231,15 @@
       "INT"
     ],
     [
-      33,
+      34,
+      37,
+      0,
+      36,
+      5,
+      "BOOLEAN"
+    ],
+    [
+      35,
       35,
       1,
       11,
@@ -1187,7 +1247,7 @@
       "INT"
     ],
     [
-      34,
+      36,
       36,
       1,
       11,

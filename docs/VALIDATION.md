@@ -73,7 +73,7 @@ these runs take about 37 s each, according to the Job Queue.
 
 The earlier 8-step, cfg 4 setting ran the **4-step** LoRA, which is distilled for neither. lightx2v publishes an 8-step LoRA for 2511, and LightX2V's `qwen_image_i2i_2511_distill.json` runs it at 8 steps with `enable_cfg: false`. The packaged Lightning workflows now use that LoRA at 8 steps and cfg 1; Standard stays at 40 steps with cfg 3.5.
 
-Missing body parts were not a sampling problem: the image was centre-cropped to the 1280 × 720 render size, so a portrait lost its head and feet. The frame now takes the image's proportions and nothing is cropped.
+Missing body parts were not a sampling problem: the image was centre-cropped to the 1280 × 720 render size, so a portrait lost its head and feet. The frame now takes the image's proportions, and the Exact Frame switch brings back a crop only when asked.
 
 `index_timestep_zero` was checked and ruled out: the pinned `qwen_image_edit_2511_fp8mixed` weights contain the `__index_timestep_zero__` key that makes ComfyUI select it automatically.
 
