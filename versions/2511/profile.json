@@ -50,6 +50,22 @@
       "sha256": "a9e81a58a78f260f67b337a6f615e8fa4cd3bc79847c77b7d61a581b789b1ba8",
       "size": 849608296,
       "variant": "lightning"
+    },
+    {
+      "repo": "fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA",
+      "revision": "e3066224ab74263f4a5b6179cd1a3b0a15577e44",
+      "file": "qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "destination": "loras/qwen-image-edit-2511-multiple-angles-lora.safetensors",
+      "sha256": "42426ded4e25fd22879d9e198b857556445ef4ca56e8da3246d0345155bb6765",
+      "size": 295140688
+    },
+    {
+      "repo": "lrzjason/Anything2Real_2601",
+      "revision": "b547e090d255ac10b190204c7868b03a61faf15e",
+      "file": "anything2real_2601.safetensors",
+      "destination": "loras/anything2real_2601.safetensors",
+      "sha256": "6ffd4a1e15e882782b8ac83ed8efabe52113ce7d2796ad7b1913f80941668c0f",
+      "size": 613580128
     }
   ]
 }

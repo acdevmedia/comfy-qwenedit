@@ -10,6 +10,9 @@ UNET = 'qwen_image_edit_2511_fp8mixed.safetensors'
 CLIP = 'qwen_2.5_vl_7b_fp8_scaled.safetensors'
 VAE = 'qwen_image_vae.safetensors'
 LORA = 'Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors'
+# Optional looks, always present and off at strength 0, where ComfyUI skips them entirely.
+ANGLES = 'qwen-image-edit-2511-multiple-angles-lora.safetensors'
+REAL = 'anything2real_2601.safetensors'
 
 # Qwen's published negative (the Qwen-Image model card, in the encoder's native Chinese), followed by the
 # failures an edit is prone to: bodies losing limbs, subjects pasted over a scene, and washed-out colour.
@@ -45,7 +48,9 @@ def spec(variant, images):
         s.append(('4', 'LoraLoaderModelOnly', {'model': model, 'lora_name': LORA, 'strength_model': 1.0},
                   [LORA, 1.0], (380, 40)))
         model = ['4', 0]
-    s += [('5', 'ModelSamplingAuraFlow', {'model': model, 'shift': 3.1}, [3.1], (720, 40)),
+    s += [('30', 'LoraLoaderModelOnly', {'model': model, 'lora_name': ANGLES, 'strength_model': 0.0}, [ANGLES, 0.0], (380, 180)),
+          ('31', 'LoraLoaderModelOnly', {'model': ['30', 0], 'lora_name': REAL, 'strength_model': 0.0}, [REAL, 0.0], (380, 320))]
+    s += [('5', 'ModelSamplingAuraFlow', {'model': ['31', 0], 'shift': 3.1}, [3.1], (720, 40)),
           ('6', 'CFGNorm', {'model': ['5', 0], 'strength': 1.0}, [1.0, False], (1060, 40))]
     loads = []
     for n in range(images):
@@ -85,6 +90,12 @@ def main():
         sync_api(api,ui)
         fit_frame_to_image(api, ui, 32)
         g.check(api, ui)
+        titles = {30: 'Camera angles LoRA: strength 1 and a <sks> prompt', 31: 'Realism LoRA: try strength 0.75 to 1'}
+        for node in ui['nodes']:
+            if node['id'] in titles:
+                node['title'] = titles[node['id']]
+        if variant == 'STANDARD':
+            g.add_draft_cache(ui, 6, 20)
         name = '%s_%s_%s.json' % (num, variant, label)
         g.dump(ROOT / 'versions/2511/api' / name, api)
         g.dump(ROOT / 'versions/2511/workflows' / name, ui)

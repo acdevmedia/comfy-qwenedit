@@ -57,6 +57,21 @@ The seed widget carries ComfyUI's standard **control after generate**, set to `r
 
 A strip of recent output images sits along the bottom of the window and refreshes as each queued graph finishes. Click a thumbnail to open the viewer: arrow keys move through the batch, **space** picks, **D** downloads, **Escape** closes. **Download picked** saves only the chosen files.
 
+## Optional LoRAs
+
+Both sit on the canvas in every packaged workflow except 10, at strength 0.
+
+- **Camera angles** ([Multiple Angles](https://huggingface.co/fal/Qwen-Image-Edit-2511-Multiple-Angles-LoRA), Apache 2.0): set strength to 1 and write the prompt as `<sks> [azimuth] [elevation] [distance]`, for example `<sks> right side view low-angle shot close-up`. It covers 96 camera positions.
+- **Realism** ([Anything2Real](https://huggingface.co/lrzjason/Anything2Real_2601), Apache 2.0): turns stylised images photographic; try strength 0.75 to 1. Leave it off for ordinary edits of photographs.
+
+Standard also has a bypassed **Draft mode** node (EasyCache): select it and press Ctrl+B for quicker, softer drafts while working out a shot.
+
+These are pinned and downloaded at first boot, never baked into the image. At strength 0 ComfyUI skips a LoRA entirely, so it costs nothing while it is off.
+
+## Speed
+
+ComfyUI starts with SageAttention and `--highvram`, so models stay on the 48 GB GPU between runs. Each boot tests Sage on the assigned GPU and falls back to PyTorch attention if the check fails; set `COMFYUI_ATTENTION=pytorch` to force that. Attention that needs a mask runs on PyTorch either way. First-boot downloads use Hugging Face's high-performance Xet mode.
+
 ## Browse and download outputs
 
 **Connect → HTTP 3923 / Copyparty** opens a gallery of everything in `/workspace/ComfyUI/output`, newest first. Sign in with the values of Runpod Secrets `COPYPARTY_USERNAME` and `COPYPARTY_SECRET`. Select files to download them, or a whole folder as a ZIP. It is read-only: nothing can be uploaded, changed or deleted, and if either secret is missing it stays off without affecting ComfyUI. The log is `/workspace/logs/copyparty.log`.
