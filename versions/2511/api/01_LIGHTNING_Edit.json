@@ -58,15 +58,22 @@
     }
   },
   "11": {
-    "class_type": "ImageScaleToTotalPixels",
+    "class_type": "ImageScale",
     "inputs": {
       "image": [
         "10",
         0
       ],
       "upscale_method": "lanczos",
-      "megapixels": 1.0,
-      "resolution_steps": 1
+      "crop": "center",
+      "width": [
+        "23",
+        0
+      ],
+      "height": [
+        "24",
+        0
+      ]
     }
   },
   "7": {
@@ -166,6 +173,18 @@
         0
       ],
       "filename_prefix": "QwenEdit/lightning"
+    }
+  },
+  "23": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 1280
+    }
+  },
+  "24": {
+    "class_type": "PrimitiveInt",
+    "inputs": {
+      "value": 720
     }
   }
 }

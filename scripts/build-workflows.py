@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import workflow_graph as g
+from workflow_dimensions import apply_dimensions, sync_api
 
 ROOT = Path(__file__).resolve().parents[1]
 UNET = 'qwen_image_edit_2511_fp8mixed.safetensors'
@@ -69,6 +70,8 @@ def main():
             ('03', 'STANDARD', 1, 'Edit'), ('04', 'STANDARD', 3, 'Edit_Multi_Image')]
     for num, variant, images, label in plan:
         api, ui = g.build(spec(variant, images))
+        apply_dimensions(ui)
+        sync_api(api,ui)
         g.check(api, ui)
         name = '%s_%s_%s.json' % (num, variant, label)
         g.dump(ROOT / 'versions/2511/api' / name, api)

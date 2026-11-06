@@ -1,8 +1,8 @@
 {
   "id": "f7f912b6-c8f7-42b8-82b0-45d1cd6d39b0",
   "revision": 0,
-  "last_node_id": 139,
-  "last_link_id": 236,
+  "last_node_id": 141,
+  "last_link_id": 242,
   "nodes": [
     {
       "id": 107,
@@ -468,7 +468,7 @@
     },
     {
       "id": 93,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         -300,
         250
@@ -485,6 +485,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 177
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 237
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 238
         }
       ],
       "outputs": [
@@ -499,7 +515,7 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.3.50",
-        "Node name for S&R": "ImageScaleToTotalPixels",
+        "Node name for S&R": "ImageScale",
         "enableTabs": false,
         "tabWidth": 65,
         "tabXOffset": 10,
@@ -518,12 +534,15 @@
       },
       "widgets_values": [
         "lanczos",
-        1
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 106,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         -310,
         620
@@ -540,6 +559,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 196
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 239
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 240
         }
       ],
       "outputs": [
@@ -554,7 +589,7 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.3.50",
-        "Node name for S&R": "ImageScaleToTotalPixels",
+        "Node name for S&R": "ImageScale",
         "enableTabs": false,
         "tabWidth": 65,
         "tabXOffset": 10,
@@ -573,12 +608,15 @@
       },
       "widgets_values": [
         "lanczos",
-        1
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 104,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         -300,
         990
@@ -595,6 +633,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 195
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 241
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 242
         }
       ],
       "outputs": [
@@ -609,7 +663,7 @@
       "properties": {
         "cnr_id": "comfy-core",
         "ver": "0.3.50",
-        "Node name for S&R": "ImageScaleToTotalPixels",
+        "Node name for S&R": "ImageScale",
         "enableTabs": false,
         "tabWidth": 65,
         "tabXOffset": 10,
@@ -628,8 +682,11 @@
       },
       "widgets_values": [
         "lanczos",
-        1
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 108,
@@ -2054,6 +2111,76 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 140,
+      "type": "PrimitiveInt",
+      "title": "Render Width",
+      "pos": [
+        -400,
+        0
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            237,
+            239,
+            241
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        1280,
+        "fixed"
+      ]
+    },
+    {
+      "id": 141,
+      "type": "PrimitiveInt",
+      "title": "Render Height",
+      "pos": [
+        -400,
+        150
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            238,
+            240,
+            242
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        720,
+        "fixed"
+      ]
     }
   ],
   "links": [
@@ -2320,6 +2447,54 @@
       66,
       0,
       "MODEL"
+    ],
+    [
+      237,
+      140,
+      0,
+      93,
+      1,
+      "INT"
+    ],
+    [
+      238,
+      141,
+      0,
+      93,
+      2,
+      "INT"
+    ],
+    [
+      239,
+      140,
+      0,
+      106,
+      1,
+      "INT"
+    ],
+    [
+      240,
+      141,
+      0,
+      106,
+      2,
+      "INT"
+    ],
+    [
+      241,
+      140,
+      0,
+      104,
+      1,
+      "INT"
+    ],
+    [
+      242,
+      141,
+      0,
+      104,
+      2,
+      "INT"
     ]
   ],
   "groups": [
@@ -2393,5 +2568,9 @@
     "VHS_MetadataImage": true,
     "VHS_KeepIntermediate": true
   },
-  "version": 0.4
+  "version": 0.4,
+  "state": {
+    "lastLinkId": 242,
+    "lastNodeId": 141
+  }
 }

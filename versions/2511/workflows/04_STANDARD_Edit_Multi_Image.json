@@ -1,6 +1,6 @@
 {
-  "last_node_id": 22,
-  "last_link_id": 24,
+  "last_node_id": 24,
+  "last_link_id": 30,
   "nodes": [
     {
       "id": 1,
@@ -223,7 +223,7 @@
     },
     {
       "id": 11,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         380,
         480
@@ -240,6 +240,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 3
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 25
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 26
         }
       ],
       "outputs": [
@@ -255,12 +271,15 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "ImageScaleToTotalPixels"
+        "Node name for S&R": "ImageScale"
       },
       "widgets_values": [
         "lanczos",
-        1.0
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 12,
@@ -303,7 +322,7 @@
     },
     {
       "id": 13,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         380,
         810
@@ -320,6 +339,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 4
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 27
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 28
         }
       ],
       "outputs": [
@@ -334,12 +369,15 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "ImageScaleToTotalPixels"
+        "Node name for S&R": "ImageScale"
       },
       "widgets_values": [
         "lanczos",
-        1.0
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 14,
@@ -382,7 +420,7 @@
     },
     {
       "id": 15,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         380,
         1140
@@ -399,6 +437,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 5
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 29
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 30
         }
       ],
       "outputs": [
@@ -413,12 +467,15 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "ImageScaleToTotalPixels"
+        "Node name for S&R": "ImageScale"
       },
       "widgets_values": [
         "lanczos",
-        1.0
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 7,
@@ -705,6 +762,76 @@
       "widgets_values": [
         "QwenEdit/standard"
       ]
+    },
+    {
+      "id": 23,
+      "type": "PrimitiveInt",
+      "title": "Render Width",
+      "pos": [
+        -400,
+        0
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            25,
+            27,
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        1280,
+        "fixed"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "PrimitiveInt",
+      "title": "Render Height",
+      "pos": [
+        -400,
+        150
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            26,
+            28,
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        720,
+        "fixed"
+      ]
     }
   ],
   "links": [
@@ -899,10 +1026,62 @@
       22,
       0,
       "IMAGE"
+    ],
+    [
+      25,
+      23,
+      0,
+      11,
+      1,
+      "INT"
+    ],
+    [
+      26,
+      24,
+      0,
+      11,
+      2,
+      "INT"
+    ],
+    [
+      27,
+      23,
+      0,
+      13,
+      1,
+      "INT"
+    ],
+    [
+      28,
+      24,
+      0,
+      13,
+      2,
+      "INT"
+    ],
+    [
+      29,
+      23,
+      0,
+      15,
+      1,
+      "INT"
+    ],
+    [
+      30,
+      24,
+      0,
+      15,
+      2,
+      "INT"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {},
-  "version": 0.4
+  "version": 0.4,
+  "state": {
+    "lastLinkId": 30,
+    "lastNodeId": 24
+  }
 }

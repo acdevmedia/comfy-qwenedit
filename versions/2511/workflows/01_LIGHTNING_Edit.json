@@ -1,6 +1,6 @@
 {
-  "last_node_id": 22,
-  "last_link_id": 19,
+  "last_node_id": 24,
+  "last_link_id": 21,
   "nodes": [
     {
       "id": 1,
@@ -262,7 +262,7 @@
     },
     {
       "id": 11,
-      "type": "ImageScaleToTotalPixels",
+      "type": "ImageScale",
       "pos": [
         380,
         480
@@ -279,6 +279,22 @@
           "name": "image",
           "type": "IMAGE",
           "link": 4
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 20
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 21
         }
       ],
       "outputs": [
@@ -294,12 +310,15 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "ImageScaleToTotalPixels"
+        "Node name for S&R": "ImageScale"
       },
       "widgets_values": [
         "lanczos",
-        1.0
-      ]
+        1280,
+        720,
+        "center"
+      ],
+      "title": "Resize reference to render width and height"
     },
     {
       "id": 7,
@@ -566,6 +585,72 @@
       "widgets_values": [
         "QwenEdit/lightning"
       ]
+    },
+    {
+      "id": 23,
+      "type": "PrimitiveInt",
+      "title": "Render Width",
+      "pos": [
+        -400,
+        0
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        1280,
+        "fixed"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "PrimitiveInt",
+      "title": "Render Height",
+      "pos": [
+        -400,
+        150
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        720,
+        "fixed"
+      ]
     }
   ],
   "links": [
@@ -720,10 +805,30 @@
       22,
       0,
       "IMAGE"
+    ],
+    [
+      20,
+      23,
+      0,
+      11,
+      1,
+      "INT"
+    ],
+    [
+      21,
+      24,
+      0,
+      11,
+      2,
+      "INT"
     ]
   ],
   "groups": [],
   "config": {},
   "extra": {},
-  "version": 0.4
+  "version": 0.4,
+  "state": {
+    "lastLinkId": 21,
+    "lastNodeId": 24
+  }
 }
