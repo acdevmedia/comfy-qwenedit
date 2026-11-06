@@ -25,26 +25,29 @@ Describe the *change*, not the whole picture: "Change the background to a rainy 
 
 | Workflow | Images | Steps | CFG |
 | --- | --- | --- | --- |
-| **01 Lightning Edit** (default) | 1 | 8 | 4.0 |
-| **02 Lightning Edit Multi Image** | up to 3 | 8 | 4.0 |
-| **03 Standard Edit** | 1 | 40 | 4.0 |
-| **04 Standard Edit Multi Image** | up to 3 | 40 | 4.0 |
+| **01 Lightning Edit** (default) | 1 | 8 | 1.0 |
+| **02 Lightning Edit Multi Image** | up to 3 | 8 | 1.0 |
+| **03 Standard Edit** | 1 | 40 | 3.5 |
+| **04 Standard Edit Multi Image** | up to 3 | 40 | 3.5 |
 | **10 Advanced user recipe** | up to 3 | 4 | 1.0 |
 
-**Lightning** applies the distilled LoRA at strength 1.0 and is the default. It runs at **8 steps and cfg 4**, which is not the LoRA's nominal setting: it is a 4-step distillation meant for cfg 1, but hands-on testing found that cfg 4 over 8 steps makes it follow an edit instruction where 4 steps at cfg 1 often did not. Removing a phone from a photo, for example, now removes it. Because cfg above 1 adds a second forward pass, an image takes about 37 s on an A40 against about 14 s at cfg 1. **Standard** is the base model on the published reference settings, 40 steps and true CFG 4.0, and is far slower, taking about 127 s for one image and 325 s with three inputs on an A40 at 512 × 512. Prefer Lightning, and use an L40S for standard. `MODEL_MODE` selects which to download; the two share every weight except the 0.85 GB LoRA.
+**Lightning** applies the **8-step** distilled LoRA at strength 1.0 and is the default. It runs at **8 steps with guidance off (cfg 1)**, which is how LightX2V publishes and configures that LoRA. It is not trained for higher cfg, and raising it brings on washed-out or colour-cast images. At cfg 1 ComfyUI skips the negative prompt altogether, so the packaged negative only takes effect if you raise cfg.
 
-**Larger edits are the limit.** Adding a new person, moving the subject to a different location or changing the camera angle land less reliably than small, local edits, at either variant. Describe the change and what must stay, and expect to try a few seeds.
+**Standard** is the base model at the model card's **40 steps** with cfg **3.5**, and its negative prompt is fully active. It takes about five times as long and is the better choice for big changes such as a new location or time of day.
 
-The multi-image workflows take one to three pictures; leave the extra loaders empty or unconnected for fewer. Each input is scaled to a total of about **1 megapixel** before encoding, which is the resolution the model works at, and the output follows the first image's proportions.
+**Larger edits ask more of the prompt.** Say what changes and what stays, and describe the light, not just the place: "Change the location to a golf course at 9pm, under a dark night sky with floodlights over the fairway. Relight the person to match the night scene. Keep their face, pose, clothing and full body exactly as they are." Alibaba's own examples follow the same shape: name what to preserve, then the change, then the direction and quality of the light. Try a few seeds, and use Standard if Lightning falls short.
 
-**10 Advanced user recipe** is the hand-tuned graph this package was built from, kept verbatim as a reference.
+The multi-image workflows take one to three pictures; leave the extra loaders empty or unconnected for fewer. Every input is used whole. The encoder sizes each reference itself to about **1 megapixel**, keeping its proportions, and the output takes the first image's shape at the area set by **Render Width** and **Render Height** (1024 × 1024 by default, the same area the encoder uses), in multiples of 32. A head-to-toe portrait stays head to toe.
+
+**10 Advanced user recipe** is the hand-tuned graph this package was built from, kept verbatim as a reference: it uses the 4-step LoRA at cfg 1 and still centre-crops to Render Width and Height, so use 01 to 04 for portrait images.
 
 ## Settings that matter
 
 - **Sampler** `euler` / `simple`, `denoise` 1.0, with `ModelSamplingAuraFlow` shift **3.1** and `CFGNorm` strength 1.0. These match the upstream templates.
 - **Text encoder** loads with `CLIPLoader` type `qwen_image`.
-- **Megapixels** on each `ImageScaleToTotalPixels` node sets working resolution. Raise it for more detail at a higher memory cost; 1.0 is the default.
-- **Negative prompt** is empty for Lightning and a single space for Standard, as on the model card. Both run above cfg 1, so a negative prompt now has an effect if you add one.
+- **Render Width and Render Height** set the working area. Raise them for more detail at a higher memory cost, though the model is built around 1 megapixel.
+- **Negative prompt** opens with Qwen's published negative in Chinese, the encoder's native language, and adds the failures edits are prone to: missing limbs, pasted-on subjects, washed-out or pastel colour, mismatched light. Both variants carry it; only cfg above 1 uses it, so it is active on Standard.
+- **Reference method** needs no extra node: the pinned 2511 weights carry ComfyUI's `index_timestep_zero` marker, so the method is selected automatically.
 
 ## Seeds
 
@@ -54,9 +57,17 @@ The seed widget carries ComfyUI's standard **control after generate**, set to `r
 
 A strip of recent output images sits along the bottom of the window and refreshes as each queued graph finishes. Click a thumbnail to open the viewer: arrow keys move through the batch, **space** picks, **D** downloads, **Escape** closes. **Download picked** saves only the chosen files.
 
+## Browse and download outputs
+
+**Connect → HTTP 3923 / Copyparty** opens a gallery of everything in `/workspace/ComfyUI/output`, newest first. Sign in with the values of Runpod Secrets `COPYPARTY_USERNAME` and `COPYPARTY_SECRET`. Select files to download them, or a whole folder as a ZIP. It is read-only: nothing can be uploaded, changed or deleted, and if either secret is missing it stays off without affecting ComfyUI. The log is `/workspace/logs/copyparty.log`.
+
+`zip`, `unzip` and `aws` are on the path in the terminal for moving outputs off the Pod yourself.
+
 ## Environment variables
 
 - `HF_TOKEN`: `{{ RUNPOD_SECRET_HUGGINGFACE_TOKEN }}`; optional read token for authenticated Hugging Face downloads.
+- `COPYPARTY_USERNAME`: `{{ RUNPOD_SECRET_COPYPARTY_USERNAME }}`; login for the file browser on port 3923.
+- `COPYPARTY_PASSWORD`: `{{ RUNPOD_SECRET_COPYPARTY_SECRET }}`; its password. The browser stays off without both.
 - `HF_HOME=/workspace/.cache/huggingface`: Hugging Face cache and metadata location.
 - `MODEL_MODE=lightning`: which variant to download — `lightning`, `standard` or `both`. About 31 GB either way; the variants differ by a 0.85 GB LoRA.
 - `STUDIO_VERSION=2511`: which generation this image serves, baked at build time from `versions/2511/profile.json`.

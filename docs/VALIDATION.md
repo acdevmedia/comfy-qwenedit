@@ -68,3 +68,13 @@ Two caveats. This setting has been judged by hand on real photographs, not by th
 have not been through a fresh matrix run since the change. And a separate sweep at 4 steps found cfg 4 and 6 added a
 warm colour cast to the whole image on a lighthouse photograph, so the cast is worth watching at 8 steps. On an A40
 these runs take about 37 s each, according to the Job Queue.
+
+## Defaults changed after reviewing the published configuration
+
+The earlier 8-step, cfg 4 setting ran the **4-step** LoRA, which is distilled for neither. lightx2v publishes an 8-step LoRA for 2511, and LightX2V's `qwen_image_i2i_2511_distill.json` runs it at 8 steps with `enable_cfg: false`. The packaged Lightning workflows now use that LoRA at 8 steps and cfg 1; Standard stays at 40 steps with cfg 3.5.
+
+Missing body parts were not a sampling problem: the image was centre-cropped to the 1280 × 720 render size, so a portrait lost its head and feet. The frame now takes the image's proportions and nothing is cropped.
+
+`index_timestep_zero` was checked and ruled out: the pinned `qwen_image_edit_2511_fp8mixed` weights contain the `__index_timestep_zero__` key that makes ComfyUI select it automatically.
+
+None of this has been through a GPU run yet. Whether cfg 1 on the 8-step LoRA follows large edits as well as hoped is untested, and is the first thing to check by eye.

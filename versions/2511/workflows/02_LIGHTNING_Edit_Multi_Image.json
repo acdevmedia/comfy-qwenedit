@@ -1,6 +1,6 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 31,
+  "last_node_id": 27,
+  "last_link_id": 36,
   "nodes": [
     {
       "id": 1,
@@ -55,8 +55,8 @@
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            7,
-            12
+            5,
+            10
           ],
           "slot_index": 0
         }
@@ -90,10 +90,10 @@
           "name": "VAE",
           "type": "VAE",
           "links": [
-            8,
-            13,
-            18,
-            24
+            6,
+            11,
+            16,
+            22
           ],
           "slot_index": 0
         }
@@ -140,7 +140,7 @@
         "Node name for S&R": "LoraLoaderModelOnly"
       },
       "widgets_values": [
-        "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
         1.0
       ]
     },
@@ -208,7 +208,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            19
+            17
           ],
           "slot_index": 0
         }
@@ -241,7 +241,10 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            4
+            4,
+            7,
+            12,
+            26
           ],
           "slot_index": 0
         },
@@ -261,66 +264,6 @@
       ]
     },
     {
-      "id": 11,
-      "type": "ImageScale",
-      "pos": [
-        380,
-        480
-      ],
-      "size": [
-        320,
-        120
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 4
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "widget": {
-            "name": "width"
-          },
-          "link": 26
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "widget": {
-            "name": "height"
-          },
-          "link": 27
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            9,
-            14,
-            17
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ImageScale"
-      },
-      "widgets_values": [
-        "lanczos",
-        1280,
-        720,
-        "center"
-      ],
-      "title": "Resize reference to render width and height"
-    },
-    {
       "id": 12,
       "type": "LoadImage",
       "pos": [
@@ -332,7 +275,7 @@
         120
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -340,7 +283,8 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            5
+            8,
+            13
           ],
           "slot_index": 0
         },
@@ -360,65 +304,6 @@
       ]
     },
     {
-      "id": 13,
-      "type": "ImageScale",
-      "pos": [
-        380,
-        810
-      ],
-      "size": [
-        320,
-        120
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 5
-        },
-        {
-          "name": "width",
-          "type": "INT",
-          "widget": {
-            "name": "width"
-          },
-          "link": 28
-        },
-        {
-          "name": "height",
-          "type": "INT",
-          "widget": {
-            "name": "height"
-          },
-          "link": 29
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            10,
-            15
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ImageScale"
-      },
-      "widgets_values": [
-        "lanczos",
-        1280,
-        720,
-        "center"
-      ],
-      "title": "Resize reference to render width and height"
-    },
-    {
       "id": 14,
       "type": "LoadImage",
       "pos": [
@@ -430,7 +315,7 @@
         120
       ],
       "flags": {},
-      "order": 10,
+      "order": 8,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -438,7 +323,8 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            6
+            9,
+            14
           ],
           "slot_index": 0
         },
@@ -458,24 +344,24 @@
       ]
     },
     {
-      "id": 15,
+      "id": 11,
       "type": "ImageScale",
       "pos": [
         380,
-        1140
+        480
       ],
       "size": [
         320,
         120
       ],
       "flags": {},
-      "order": 11,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 6
+          "link": 4
         },
         {
           "name": "width",
@@ -483,7 +369,7 @@
           "widget": {
             "name": "width"
           },
-          "link": 30
+          "link": 35
         },
         {
           "name": "height",
@@ -491,7 +377,7 @@
           "widget": {
             "name": "height"
           },
-          "link": 31
+          "link": 36
         }
       ],
       "outputs": [
@@ -499,8 +385,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            11,
-            16
+            15
           ],
           "slot_index": 0
         }
@@ -510,11 +395,11 @@
       },
       "widgets_values": [
         "lanczos",
-        1280,
-        720,
-        "center"
+        1024,
+        1024,
+        "disabled"
       ],
-      "title": "Resize reference to render width and height"
+      "title": "Resize image to the fitted frame"
     },
     {
       "id": 7,
@@ -528,33 +413,33 @@
         120
       ],
       "flags": {},
-      "order": 12,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 7
+          "link": 5
         },
         {
           "name": "vae",
           "type": "VAE",
-          "link": 8
+          "link": 6
         },
         {
           "name": "image1",
           "type": "IMAGE",
-          "link": 9
+          "link": 7
         },
         {
           "name": "image2",
           "type": "IMAGE",
-          "link": 10
+          "link": 8
         },
         {
           "name": "image3",
           "type": "IMAGE",
-          "link": 11
+          "link": 9
         }
       ],
       "outputs": [
@@ -562,7 +447,7 @@
           "name": "CONDITIONING",
           "type": "CONDITIONING",
           "links": [
-            20
+            18
           ],
           "slot_index": 0
         }
@@ -571,7 +456,7 @@
         "Node name for S&R": "TextEncodeQwenImageEditPlus"
       },
       "widgets_values": [
-        "Change the background to a sunny beach and keep the person exactly as they are."
+        "Change the location to a golf course at 9pm, under a dark night sky with floodlights over the fairway. Relight the person to match the night scene. Keep their face, pose, clothing and full body exactly as they are."
       ]
     },
     {
@@ -586,33 +471,33 @@
         120
       ],
       "flags": {},
-      "order": 13,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 12
+          "link": 10
         },
         {
           "name": "vae",
           "type": "VAE",
-          "link": 13
+          "link": 11
         },
         {
           "name": "image1",
           "type": "IMAGE",
-          "link": 14
+          "link": 12
         },
         {
           "name": "image2",
           "type": "IMAGE",
-          "link": 15
+          "link": 13
         },
         {
           "name": "image3",
           "type": "IMAGE",
-          "link": 16
+          "link": 14
         }
       ],
       "outputs": [
@@ -620,7 +505,7 @@
           "name": "CONDITIONING",
           "type": "CONDITIONING",
           "links": [
-            21
+            19
           ],
           "slot_index": 0
         }
@@ -629,7 +514,7 @@
         "Node name for S&R": "TextEncodeQwenImageEditPlus"
       },
       "widgets_values": [
-        ""
+        "\u4f4e\u5206\u8fa8\u7387\uff0c\u4f4e\u753b\u8d28\uff0c\u80a2\u4f53\u7578\u5f62\uff0c\u624b\u6307\u7578\u5f62\uff0c\u753b\u9762\u8fc7\u9971\u548c\uff0c\u8721\u50cf\u611f\uff0c\u4eba\u8138\u65e0\u7ec6\u8282\uff0c\u8fc7\u5ea6\u5149\u6ed1\uff0c\u753b\u9762\u5177\u6709AI\u611f\u3002\u6784\u56fe\u6df7\u4e71\u3002\u6587\u5b57\u6a21\u7cca\uff0c\u626d\u66f2\u3002 low resolution, low quality, blurry, out of focus, jpeg artifacts, noise, grid pattern, banding, watermark, text overlay, washed out, faded, pastel colours, milky haze, colour cast, oversaturated, flat lighting, painting, watercolour, illustration, cartoon, 3d render, airbrushed, plastic skin, waxy skin, deformed body, distorted proportions, missing limbs, missing body parts, cut off body, cropped body, partial body, extra limbs, malformed hands, extra fingers, disfigured face, changed face, different person, pasted on subject, cutout edges, halo around subject, floating subject, mismatched lighting, inconsistent shadows, wrong time of day, unchanged background"
       ]
     },
     {
@@ -644,18 +529,18 @@
         120
       ],
       "flags": {},
-      "order": 14,
+      "order": 12,
       "mode": 0,
       "inputs": [
         {
           "name": "pixels",
           "type": "IMAGE",
-          "link": 17
+          "link": 15
         },
         {
           "name": "vae",
           "type": "VAE",
-          "link": 18
+          "link": 16
         }
       ],
       "outputs": [
@@ -663,7 +548,7 @@
           "name": "LATENT",
           "type": "LATENT",
           "links": [
-            22
+            20
           ],
           "slot_index": 0
         }
@@ -685,28 +570,28 @@
         120
       ],
       "flags": {},
-      "order": 15,
+      "order": 13,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "MODEL",
-          "link": 19
+          "link": 17
         },
         {
           "name": "positive",
           "type": "CONDITIONING",
-          "link": 20
+          "link": 18
         },
         {
           "name": "negative",
           "type": "CONDITIONING",
-          "link": 21
+          "link": 19
         },
         {
           "name": "latent_image",
           "type": "LATENT",
-          "link": 22
+          "link": 20
         }
       ],
       "outputs": [
@@ -714,7 +599,7 @@
           "name": "LATENT",
           "type": "LATENT",
           "links": [
-            23
+            21
           ],
           "slot_index": 0
         }
@@ -726,7 +611,7 @@
         0,
         "randomize",
         8,
-        4.0,
+        1.0,
         "euler",
         "simple",
         1.0
@@ -744,18 +629,18 @@
         120
       ],
       "flags": {},
-      "order": 16,
+      "order": 14,
       "mode": 0,
       "inputs": [
         {
           "name": "samples",
           "type": "LATENT",
-          "link": 23
+          "link": 21
         },
         {
           "name": "vae",
           "type": "VAE",
-          "link": 24
+          "link": 22
         }
       ],
       "outputs": [
@@ -763,7 +648,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            25
+            23
           ],
           "slot_index": 0
         }
@@ -785,13 +670,13 @@
         120
       ],
       "flags": {},
-      "order": 17,
+      "order": 15,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 25
+          "link": 23
         }
       ],
       "outputs": [],
@@ -823,9 +708,8 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            26,
-            28,
-            30
+            27,
+            31
           ]
         }
       ],
@@ -833,7 +717,7 @@
         "Node name for S&R": "PrimitiveInt"
       },
       "widgets_values": [
-        1280,
+        1024,
         "fixed"
       ]
     },
@@ -858,9 +742,8 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            27,
-            29,
-            31
+            28,
+            32
           ]
         }
       ],
@@ -868,8 +751,209 @@
         "Node name for S&R": "PrimitiveInt"
       },
       "widgets_values": [
-        720,
+        1024,
         "fixed"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "GetImageSize",
+      "pos": [
+        40,
+        810
+      ],
+      "size": [
+        320,
+        120
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            29,
+            33
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            30,
+            34
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Size of your image",
+      "properties": {
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 26,
+      "type": "ComfyMathExpression",
+      "pos": [
+        380,
+        810
+      ],
+      "size": [
+        320,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "expression",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "expression"
+          }
+        },
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 27
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 28
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 29
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            35
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Fit Frame Width",
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(64,round(sqrt(a*b*c/d)/32)*32)"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "ComfyMathExpression",
+      "pos": [
+        380,
+        1010
+      ],
+      "size": [
+        320,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "expression",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "expression"
+          }
+        },
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 31
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 32
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 33
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            36
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Fit Frame Height",
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(64,round(sqrt(a*b*d/c)/32)*32)"
       ]
     }
   ],
@@ -908,22 +992,6 @@
     ],
     [
       5,
-      12,
-      0,
-      13,
-      0,
-      "IMAGE"
-    ],
-    [
-      6,
-      14,
-      0,
-      15,
-      0,
-      "IMAGE"
-    ],
-    [
-      7,
       2,
       0,
       7,
@@ -931,7 +999,7 @@
       "CLIP"
     ],
     [
-      8,
+      6,
       3,
       0,
       7,
@@ -939,31 +1007,31 @@
       "VAE"
     ],
     [
-      9,
-      11,
+      7,
+      10,
       0,
       7,
       2,
+      "IMAGE"
+    ],
+    [
+      8,
+      12,
+      0,
+      7,
+      3,
+      "IMAGE"
+    ],
+    [
+      9,
+      14,
+      0,
+      7,
+      4,
       "IMAGE"
     ],
     [
       10,
-      13,
-      0,
-      7,
-      3,
-      "IMAGE"
-    ],
-    [
-      11,
-      15,
-      0,
-      7,
-      4,
-      "IMAGE"
-    ],
-    [
-      12,
       2,
       0,
       8,
@@ -971,7 +1039,7 @@
       "CLIP"
     ],
     [
-      13,
+      11,
       3,
       0,
       8,
@@ -979,31 +1047,31 @@
       "VAE"
     ],
     [
-      14,
-      11,
+      12,
+      10,
       0,
       8,
       2,
       "IMAGE"
     ],
     [
-      15,
       13,
+      12,
       0,
       8,
       3,
       "IMAGE"
     ],
     [
-      16,
-      15,
+      14,
+      14,
       0,
       8,
       4,
       "IMAGE"
     ],
     [
-      17,
+      15,
       11,
       0,
       9,
@@ -1011,7 +1079,7 @@
       "IMAGE"
     ],
     [
-      18,
+      16,
       3,
       0,
       9,
@@ -1019,7 +1087,7 @@
       "VAE"
     ],
     [
-      19,
+      17,
       6,
       0,
       20,
@@ -1027,7 +1095,7 @@
       "MODEL"
     ],
     [
-      20,
+      18,
       7,
       0,
       20,
@@ -1035,7 +1103,7 @@
       "CONDITIONING"
     ],
     [
-      21,
+      19,
       8,
       0,
       20,
@@ -1043,7 +1111,7 @@
       "CONDITIONING"
     ],
     [
-      22,
+      20,
       9,
       0,
       20,
@@ -1051,7 +1119,7 @@
       "LATENT"
     ],
     [
-      23,
+      21,
       20,
       0,
       21,
@@ -1059,7 +1127,7 @@
       "LATENT"
     ],
     [
-      24,
+      22,
       3,
       0,
       21,
@@ -1067,7 +1135,7 @@
       "VAE"
     ],
     [
-      25,
+      23,
       21,
       0,
       22,
@@ -1076,49 +1144,89 @@
     ],
     [
       26,
-      23,
+      10,
       0,
-      11,
-      1,
-      "INT"
+      25,
+      0,
+      "IMAGE"
     ],
     [
       27,
-      24,
+      23,
       0,
-      11,
-      2,
+      26,
+      1,
       "INT"
     ],
     [
       28,
-      23,
-      0,
-      13,
-      1,
-      "INT"
-    ],
-    [
-      29,
       24,
       0,
-      13,
+      26,
       2,
       "INT"
     ],
     [
-      30,
-      23,
+      29,
+      25,
       0,
-      15,
+      26,
+      3,
+      "INT"
+    ],
+    [
+      30,
+      25,
       1,
+      26,
+      4,
       "INT"
     ],
     [
       31,
+      23,
+      0,
+      27,
+      1,
+      "INT"
+    ],
+    [
+      32,
       24,
       0,
-      15,
+      27,
+      2,
+      "INT"
+    ],
+    [
+      33,
+      25,
+      0,
+      27,
+      3,
+      "INT"
+    ],
+    [
+      34,
+      25,
+      1,
+      27,
+      4,
+      "INT"
+    ],
+    [
+      35,
+      26,
+      1,
+      11,
+      1,
+      "INT"
+    ],
+    [
+      36,
+      27,
+      1,
+      11,
       2,
       "INT"
     ]
@@ -1128,7 +1236,7 @@
   "extra": {},
   "version": 0.4,
   "state": {
-    "lastLinkId": 31,
+    "lastLinkId": 25,
     "lastNodeId": 24
   }
 }

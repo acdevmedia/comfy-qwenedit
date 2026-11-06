@@ -1,6 +1,6 @@
 {
-  "last_node_id": 24,
-  "last_link_id": 21,
+  "last_node_id": 27,
+  "last_link_id": 32,
   "nodes": [
     {
       "id": 1,
@@ -140,7 +140,7 @@
         "Node name for S&R": "LoraLoaderModelOnly"
       },
       "widgets_values": [
-        "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+        "Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
         1.0
       ]
     },
@@ -241,7 +241,10 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            4
+            4,
+            7,
+            10,
+            22
           ],
           "slot_index": 0
         },
@@ -286,7 +289,7 @@
           "widget": {
             "name": "width"
           },
-          "link": 20
+          "link": 31
         },
         {
           "name": "height",
@@ -294,7 +297,7 @@
           "widget": {
             "name": "height"
           },
-          "link": 21
+          "link": 32
         }
       ],
       "outputs": [
@@ -302,8 +305,6 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            7,
-            10,
             11
           ],
           "slot_index": 0
@@ -314,11 +315,11 @@
       },
       "widgets_values": [
         "lanczos",
-        1280,
-        720,
-        "center"
+        1024,
+        1024,
+        "disabled"
       ],
-      "title": "Resize reference to render width and height"
+      "title": "Resize image to the fitted frame"
     },
     {
       "id": 7,
@@ -365,7 +366,7 @@
         "Node name for S&R": "TextEncodeQwenImageEditPlus"
       },
       "widgets_values": [
-        "Change the background to a sunny beach and keep the person exactly as they are."
+        "Change the location to a golf course at 9pm, under a dark night sky with floodlights over the fairway. Relight the person to match the night scene. Keep their face, pose, clothing and full body exactly as they are."
       ]
     },
     {
@@ -413,7 +414,7 @@
         "Node name for S&R": "TextEncodeQwenImageEditPlus"
       },
       "widgets_values": [
-        ""
+        "\u4f4e\u5206\u8fa8\u7387\uff0c\u4f4e\u753b\u8d28\uff0c\u80a2\u4f53\u7578\u5f62\uff0c\u624b\u6307\u7578\u5f62\uff0c\u753b\u9762\u8fc7\u9971\u548c\uff0c\u8721\u50cf\u611f\uff0c\u4eba\u8138\u65e0\u7ec6\u8282\uff0c\u8fc7\u5ea6\u5149\u6ed1\uff0c\u753b\u9762\u5177\u6709AI\u611f\u3002\u6784\u56fe\u6df7\u4e71\u3002\u6587\u5b57\u6a21\u7cca\uff0c\u626d\u66f2\u3002 low resolution, low quality, blurry, out of focus, jpeg artifacts, noise, grid pattern, banding, watermark, text overlay, washed out, faded, pastel colours, milky haze, colour cast, oversaturated, flat lighting, painting, watercolour, illustration, cartoon, 3d render, airbrushed, plastic skin, waxy skin, deformed body, distorted proportions, missing limbs, missing body parts, cut off body, cropped body, partial body, extra limbs, malformed hands, extra fingers, disfigured face, changed face, different person, pasted on subject, cutout edges, halo around subject, floating subject, mismatched lighting, inconsistent shadows, wrong time of day, unchanged background"
       ]
     },
     {
@@ -510,7 +511,7 @@
         0,
         "randomize",
         8,
-        4.0,
+        1.0,
         "euler",
         "simple",
         1.0
@@ -607,7 +608,8 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            20
+            23,
+            27
           ]
         }
       ],
@@ -615,7 +617,7 @@
         "Node name for S&R": "PrimitiveInt"
       },
       "widgets_values": [
-        1280,
+        1024,
         "fixed"
       ]
     },
@@ -640,7 +642,8 @@
           "name": "INT",
           "type": "INT",
           "links": [
-            21
+            24,
+            28
           ]
         }
       ],
@@ -648,8 +651,209 @@
         "Node name for S&R": "PrimitiveInt"
       },
       "widgets_values": [
-        720,
+        1024,
         "fixed"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "GetImageSize",
+      "pos": [
+        40,
+        810
+      ],
+      "size": [
+        320,
+        120
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            25,
+            29
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            26,
+            30
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Size of your image",
+      "properties": {
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 26,
+      "type": "ComfyMathExpression",
+      "pos": [
+        380,
+        810
+      ],
+      "size": [
+        320,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "expression",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "expression"
+          }
+        },
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 23
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 24
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 25
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            31
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Fit Frame Width",
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(64,round(sqrt(a*b*c/d)/32)*32)"
+      ]
+    },
+    {
+      "id": 27,
+      "type": "ComfyMathExpression",
+      "pos": [
+        380,
+        1010
+      ],
+      "size": [
+        320,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "expression",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "expression"
+          }
+        },
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 27
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 28
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 29
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            32
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null,
+          "slot_index": 2
+        }
+      ],
+      "title": "Fit Frame Height",
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(64,round(sqrt(a*b*d/c)/32)*32)"
       ]
     }
   ],
@@ -704,7 +908,7 @@
     ],
     [
       7,
-      11,
+      10,
       0,
       7,
       2,
@@ -728,7 +932,7 @@
     ],
     [
       10,
-      11,
+      10,
       0,
       8,
       2,
@@ -807,17 +1011,89 @@
       "IMAGE"
     ],
     [
-      20,
+      22,
+      10,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
       23,
       0,
+      26,
+      1,
+      "INT"
+    ],
+    [
+      24,
+      24,
+      0,
+      26,
+      2,
+      "INT"
+    ],
+    [
+      25,
+      25,
+      0,
+      26,
+      3,
+      "INT"
+    ],
+    [
+      26,
+      25,
+      1,
+      26,
+      4,
+      "INT"
+    ],
+    [
+      27,
+      23,
+      0,
+      27,
+      1,
+      "INT"
+    ],
+    [
+      28,
+      24,
+      0,
+      27,
+      2,
+      "INT"
+    ],
+    [
+      29,
+      25,
+      0,
+      27,
+      3,
+      "INT"
+    ],
+    [
+      30,
+      25,
+      1,
+      27,
+      4,
+      "INT"
+    ],
+    [
+      31,
+      26,
+      1,
       11,
       1,
       "INT"
     ],
     [
-      21,
-      24,
-      0,
+      32,
+      27,
+      1,
       11,
       2,
       "INT"

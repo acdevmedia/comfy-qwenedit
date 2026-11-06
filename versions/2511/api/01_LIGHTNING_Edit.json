@@ -27,7 +27,7 @@
         "1",
         0
       ],
-      "lora_name": "Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "lora_name": "Qwen-Image-Edit-2511-Lightning-8steps-V1.0-bf16.safetensors",
       "strength_model": 1.0
     }
   },
@@ -65,14 +65,14 @@
         0
       ],
       "upscale_method": "lanczos",
-      "crop": "center",
+      "crop": "disabled",
       "width": [
-        "23",
-        0
+        "26",
+        1
       ],
       "height": [
-        "24",
-        0
+        "27",
+        1
       ]
     }
   },
@@ -83,13 +83,13 @@
         "2",
         0
       ],
-      "prompt": "Change the background to a sunny beach and keep the person exactly as they are.",
+      "prompt": "Change the location to a golf course at 9pm, under a dark night sky with floodlights over the fairway. Relight the person to match the night scene. Keep their face, pose, clothing and full body exactly as they are.",
       "vae": [
         "3",
         0
       ],
       "image1": [
-        "11",
+        "10",
         0
       ]
     }
@@ -101,13 +101,13 @@
         "2",
         0
       ],
-      "prompt": "",
+      "prompt": "\u4f4e\u5206\u8fa8\u7387\uff0c\u4f4e\u753b\u8d28\uff0c\u80a2\u4f53\u7578\u5f62\uff0c\u624b\u6307\u7578\u5f62\uff0c\u753b\u9762\u8fc7\u9971\u548c\uff0c\u8721\u50cf\u611f\uff0c\u4eba\u8138\u65e0\u7ec6\u8282\uff0c\u8fc7\u5ea6\u5149\u6ed1\uff0c\u753b\u9762\u5177\u6709AI\u611f\u3002\u6784\u56fe\u6df7\u4e71\u3002\u6587\u5b57\u6a21\u7cca\uff0c\u626d\u66f2\u3002 low resolution, low quality, blurry, out of focus, jpeg artifacts, noise, grid pattern, banding, watermark, text overlay, washed out, faded, pastel colours, milky haze, colour cast, oversaturated, flat lighting, painting, watercolour, illustration, cartoon, 3d render, airbrushed, plastic skin, waxy skin, deformed body, distorted proportions, missing limbs, missing body parts, cut off body, cropped body, partial body, extra limbs, malformed hands, extra fingers, disfigured face, changed face, different person, pasted on subject, cutout edges, halo around subject, floating subject, mismatched lighting, inconsistent shadows, wrong time of day, unchanged background",
       "vae": [
         "3",
         0
       ],
       "image1": [
-        "11",
+        "10",
         0
       ]
     }
@@ -146,7 +146,7 @@
       ],
       "seed": 0,
       "steps": 8,
-      "cfg": 4.0,
+      "cfg": 1.0,
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1.0
@@ -178,13 +178,66 @@
   "23": {
     "class_type": "PrimitiveInt",
     "inputs": {
-      "value": 1280
+      "value": 1024
     }
   },
   "24": {
     "class_type": "PrimitiveInt",
     "inputs": {
-      "value": 720
+      "value": 1024
+    }
+  },
+  "25": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "10",
+        0
+      ]
+    }
+  },
+  "26": {
+    "class_type": "ComfyMathExpression",
+    "inputs": {
+      "expression": "max(64,round(sqrt(a*b*c/d)/32)*32)",
+      "values.a": [
+        "23",
+        0
+      ],
+      "values.b": [
+        "24",
+        0
+      ],
+      "values.c": [
+        "25",
+        0
+      ],
+      "values.d": [
+        "25",
+        1
+      ]
+    }
+  },
+  "27": {
+    "class_type": "ComfyMathExpression",
+    "inputs": {
+      "expression": "max(64,round(sqrt(a*b*d/c)/32)*32)",
+      "values.a": [
+        "23",
+        0
+      ],
+      "values.b": [
+        "24",
+        0
+      ],
+      "values.c": [
+        "25",
+        0
+      ],
+      "values.d": [
+        "25",
+        1
+      ]
     }
   }
 }

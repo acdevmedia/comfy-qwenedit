@@ -4,15 +4,29 @@ Synced to account template **Qwen Image Edit 2511 ComfyUI One-Click** (`r1fg429s
 
 [Open template](https://console.runpod.io/deploy?template=r1fg429s5w)
 
-Image: `ghcr.io/acdevmedia/qwenedit-comfyui:2511`. Container disk: **200 GB**. Workspace: `/workspace`. Template service: `8188/http` (ComfyUI). The gateway port 8000 is used by the Hub/Serverless listing only and is not exposed by the Pod template. No persistent volume is requested; `volumeInGb` is 0 and storage is temporary.
+Image: `ghcr.io/acdevmedia/qwenedit-comfyui:2511`. Container disk: **200 GB**. Workspace: `/workspace`. Template service: `8188/http` (ComfyUI) and `3923/http` (copyparty). The gateway port 8000 is used by the Hub/Serverless listing only and is not exposed by the Pod template. No persistent volume is requested; `volumeInGb` is 0 and storage is temporary.
 
 `config/runpod-template.json` holds the Pod defaults. `.runpod/template-source.json` records the account source. `.runpod/hub.json` exposes the same values through Hub inputs or fixed values. `.runpod/tests.json` uses the same defaults for readiness tests. `.runpod/test_template_sync.py` fails if any of those files, this document or the README drift apart.
 
 ## Credentials
 
+The file browser on port 3923 signs in with Runpod Secrets `COPYPARTY_USERNAME` and `COPYPARTY_SECRET`, which the template maps to `COPYPARTY_USERNAME` and `COPYPARTY_PASSWORD`.
+
 The template maps Runpod Secret `HUGGINGFACE_TOKEN` to `HF_TOKEN` for authenticated downloads and higher rate limits. Create that secret with a Hugging Face read token. The weights remain ungated: users without a token can remove the mapping and download anonymously. No credential values are stored in the repository or image.
 
 ## Template variables
+
+### `COPYPARTY_USERNAME`
+
+Default: `{{ RUNPOD_SECRET_COPYPARTY_USERNAME }}`.
+
+Username for the output file browser on port 3923, from Runpod Secret `COPYPARTY_USERNAME`.
+
+### `COPYPARTY_PASSWORD`
+
+Default: `{{ RUNPOD_SECRET_COPYPARTY_SECRET }}`.
+
+Password for the output file browser, from Runpod Secret `COPYPARTY_SECRET`. Without both values the file browser does not start; ComfyUI is unaffected.
 
 ### `HF_TOKEN`
 
@@ -30,7 +44,7 @@ Hugging Face cache and metadata directory on container storage.
 
 Default: `lightning`.
 
-Which variant to download: `lightning` (the 4-step distilled LoRA on the base model), `standard` (the base model alone, 40 steps) or `both`. The variants share every weight except the 0.85 GB LoRA, so each is about 31 GB.
+Which variant to download: `lightning` (the distilled LoRAs on the base model), `standard` (the base model alone, 40 steps) or `both`. The variants share every weight except the 0.85 GB LoRA, so each is about 31 GB.
 
 ### `STUDIO_VERSION`
 
