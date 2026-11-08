@@ -78,3 +78,27 @@ Missing body parts were not a sampling problem: the image was centre-cropped to 
 `index_timestep_zero` was checked and ruled out: the pinned `qwen_image_edit_2511_fp8mixed` weights contain the `__index_timestep_zero__` key that makes ComfyUI select it automatically.
 
 None of this has been through a GPU run yet. Whether cfg 1 on the 8-step LoRA follows large edits as well as hoped is untested, and is the first thing to check by eye.
+
+## Black image investigation — 2026-11-06, L40S
+
+The running pod used SageAttention 1.0.6 via `--use-sage-attention`. A synthetic
+512 × 512 input with a yellow circle and red rectangle reproduced an entirely black
+output (every RGB value zero), accompanied by `invalid value encountered in cast`
+in SaveImage. The base model with the Lightning LoRA bypassed also returned black.
+Resizing and a VAE encode/decode round trip both returned normal images.
+
+With the same Lightning graph, seed, input and prompt, a `ModelAttentionBackend`
+node selecting `pytorch attention` produced the requested beach background while
+preserving both shapes. This isolates the diffusion attention backend as the cause
+in this configuration. A CPU text-encoder diagnostic was interrupted because it was
+slow; no conclusion was drawn from it. The first backend-switch attempt hit a model
+patching OOM; unloading model caches and rerunning succeeded.
+
+All five saved workflows on the live pod received the PyTorch model-attention override;
+original JSON copies are in `.runtime/investigation/backup-*.json` locally. Reopen a
+saved workflow to load the fix. Source startup and both Dockerfiles now default to
+PyTorch attention. The live pod was not reset, and a rebuilt image has not been published.
+
+The follow-up Lightning test also passed at 1024 × 1024, seed 43, using the same
+synthetic source and beach prompt. All five patched saved graphs were read back
+and their sampler attention links verified.

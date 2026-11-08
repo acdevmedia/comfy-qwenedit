@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends zip unzip && rm
 COPY scripts /opt/acdev/scripts
 COPY config /opt/acdev/config
 COPY versions /opt/acdev/versions
+COPY frontend/workflow-defaults/ /opt/acdev/ComfyUI/web/extensions/ACDEV-workflow-defaults/
 COPY frontend/image-gallery/ /opt/acdev/ComfyUI/web/extensions/ACDEV-QWENEDIT-image-gallery/
 COPY .runpod/handler.py /opt/acdev/handler.py
 RUN python3 /opt/acdev/scripts/patch-comfyui-proxy-guard.py /opt/acdev/ComfyUI/server.py
@@ -18,6 +19,6 @@ RUN chmod +x /opt/acdev/scripts/*.sh && python3 /opt/acdev/scripts/check-build.p
 ARG VCS_REF=development
 RUN printf '%s\n' "$VCS_REF" > /opt/acdev/image-commit && python3 -m pip freeze > /opt/acdev/python-lock.txt
 ARG STUDIO_VERSION=2511
-ENV PYTHONWARNINGS=ignore::FutureWarning PYTHONUNBUFFERED=1 HF_XET_HIGH_PERFORMANCE=1 COMFYUI_ATTENTION=sage HF_HOME=/workspace/.cache/huggingface STUDIO_VERSION=${STUDIO_VERSION} MODEL_MODE=lightning PORT=8000 PORT_HEALTH=8001
+ENV PYTHONWARNINGS=ignore::FutureWarning PYTHONUNBUFFERED=1 HF_XET_HIGH_PERFORMANCE=1 COMFYUI_ATTENTION=pytorch HF_HOME=/workspace/.cache/huggingface STUDIO_VERSION=${STUDIO_VERSION} MODEL_MODE=lightning PORT=8000 PORT_HEALTH=8001
 EXPOSE 8188 8000 8001 2222 3923
 ENTRYPOINT ["python3", "/opt/acdev/handler.py", "/opt/acdev/scripts/start.sh"]
